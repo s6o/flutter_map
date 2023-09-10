@@ -68,11 +68,11 @@ class FlutterMapNetworkImageProvider
         Uri.parse(useFallback ? fallbackUrl ?? '' : url),
         headers: headers,
       );
+
+      return decode(await ImmutableBuffer.fromUint8List(bytes));
     } catch (_) {
       if (useFallback || fallbackUrl == null) rethrow;
       return _loadAsync(key, chunkEvents, decode, useFallback: true);
     }
-
-    return decode(await ImmutableBuffer.fromUint8List(bytes));
   }
 }
